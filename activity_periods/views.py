@@ -4,6 +4,7 @@ from .models import Profile, ActivityPeriod
 from django.contrib.auth.models import User
 import json
 from django.http import JsonResponse
+from django.shortcuts import render, get_object_or_404
 
 
 def user_details(request):
@@ -11,7 +12,7 @@ def user_details(request):
     details = []
     for user in users:
         member = {}
-        user_profile = Profile.objects.filter(user=user)
+        user_profile = get_object_or_404(Profile, user=user)
         activity_periods_of_user = ActivityPeriod.objects.filter(user=user)
         periods_of_user = [] # in string format
         for period in activity_periods_of_user:
@@ -25,8 +26,8 @@ def user_details(request):
             periods_of_user.append(period_dict)
         member = {
             "id": user.id,
-            "real_name": user_profile[0].real_name,
-            "tz": user_profile[0].tz,
+            "real_name": user_profile.real_name,
+            "tz": user_profile.tz,
             "activity_periods": periods_of_user
         }
         details.append(member)
