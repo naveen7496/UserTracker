@@ -12,7 +12,9 @@ def user_details(request):
     details = []
     for user in users:
         member = {}
+        print('bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb')
         user_profile = get_object_or_404(Profile, user=user)
+        print(user_profile.tz,'AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA')
         activity_periods_of_user = ActivityPeriod.objects.filter(user=user)
         periods_of_user = [] # in string format
         for period in activity_periods_of_user:
